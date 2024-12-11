@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\PAOModel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class AllRowsController
+class RowByKeyController
 {
     private PAOModel $model;
     public function __construct(PAOModel $model)
@@ -13,13 +14,13 @@ class AllRowsController
         $this->model = $model;
     }
 
-    public function __invoke(RequestInterface $request, ResponseInterface $response)
+    public function __invoke(RequestInterface $request, ResponseInterface $response, $args)
     {
-        $rows = $this->model->allRows();
+        $row = $this->model->rowByKey($args['key']);
         $responseBody = [
-            'message' => 'Rows successfully retrieved from database.',
+            'message' => 'Row successfully found',
             'status' => 200,
-            'data' => $rows
+            'data' => $row
         ];
 
         return $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($responseBody);
