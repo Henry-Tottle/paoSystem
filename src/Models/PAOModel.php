@@ -18,4 +18,12 @@ class PAOModel
         $rows = $query->fetchAll();
         return $rows;
     }
+
+    public function rowByKey(string $key): array
+    {
+        $query = $this->db->prepare("SELECT * FROM `paochart` WHERE `value` = :key");
+        $query->execute(['key' => $key]);
+        $row = $query->fetch();
+        return $row;
+    }
 }
