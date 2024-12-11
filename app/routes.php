@@ -18,4 +18,6 @@ return function (App $app) {
 
     $app->get('/courses', CoursesAPIController::class);
 
+    $app->get('/rows', \App\Controllers\AllRowsController::class);
+
 };
